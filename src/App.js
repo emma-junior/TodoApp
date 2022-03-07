@@ -53,19 +53,19 @@ function App() {
               key={id}
             >
               <div className="flex border-solid border border-b-[#666] h-1/2 my-[auto]">
-                <div className="flex">
+                <div className="flex ">
                   <input type="checkbox" className="my-[auto] mx-2" />
                   <p className="w-44 md:w-96">{todo}</p>
                 </div>
                 {/* <div className="flex justify-between align-middle  bg-gray-600"> */}
-                  {/* <div className=""> */}
-                  <div
-                    onClick={() => removeid(id)}
-                    className="flex justify-between align-middle bg-red-600 text-xs text-white mx-2 rounded-full "
-                  >
-                    X
-                  </div>
-                  {/* </div> */}
+                {/* <div className=""> */}
+                <div
+                  onClick={() => removeid(id)}
+                  className="flex bg-red-600 text-xs text-white mx-3 px-1 py-[auto] my-[auto] h-4 md:-mx-16 rounded-full "
+                >
+                  X
+                </div>
+                {/* </div> */}
                 {/* </div> */}
               </div>
             </div>
