@@ -22,7 +22,6 @@ function App() {
   console.log(todoitems)
   const handleSubmit = (e) => {
     e.preventDefault();
-    // let g = toggleStatus
    
     if (todo) {
       const newTodo = { todo, id: new Date().getTime().toString(), todostatus: false};
