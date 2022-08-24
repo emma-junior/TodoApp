@@ -4,11 +4,28 @@ import { useGlobalContext } from "./context";
 function App() {
   const [todo, setTodo] = useState("");
   const {todoitems, setTodoitems} = useGlobalContext();
+  const [toggleStatus, setToggleStatus] = useState(true);
 
+  const isCompleted = (id) => {
+    console.log(id)
+    let completedItem = todoitems.map((Ttodo) => {
+      if (Ttodo.id === id) {
+        return { ...Ttodo, todostatus: toggleStatus };
+      } else {
+        return Ttodo;
+      }
+    });
+    setTodoitems(completedItem);
+    setToggleStatus(!toggleStatus);
+  };
+
+  console.log(todoitems)
   const handleSubmit = (e) => {
     e.preventDefault();
+    // let g = toggleStatus
+   
     if (todo) {
-      const newTodo = { todo, id: new Date().getTime().toString() };
+      const newTodo = { todo, id: new Date().getTime().toString(), todostatus: false};
       setTodoitems([...todoitems, newTodo]);
       setTodo("");
     } else {
@@ -46,7 +63,7 @@ function App() {
           </button>
         </div>
         {todoitems.map((todolist) => {
-          const { id, todo } = todolist;
+          const { id, todo, todostatus } = todolist;
           return (
             <div
               className="bg-white w-64 ml-12 p-1 md:mx-auto md:w-96 "
@@ -54,19 +71,16 @@ function App() {
             >
               <div className="flex border-solid border border-b-[#666] h-1/2 my-[auto]">
                 <div className="flex ">
-                  <input type="checkbox" className="my-[auto] mx-2" />
-                  <p className="w-44 md:w-96">{todo}</p>
+                  <input onChange={() => isCompleted(id)} checked={todostatus} type="checkbox" className="my-[auto] mx-2" />
+                  <p className={`${todostatus ? "line-through" : ""} w-44 md:w-96`}>{todo}</p>
                 </div>
-                {/* <div className="flex justify-between align-middle  bg-gray-600"> */}
-                {/* <div className=""> */}
+                
                 <div
                   onClick={() => removeid(id)}
-                  className="flex bg-red-600 text-xs text-white mx-3 px-1 py-[auto] my-[auto] h-4 md:-mx-16 rounded-full "
+                  className="flex bg-red-600 text-xs text-white mx-3 px-1 py-[auto] my-[auto] h-4 md:-mx-16 rounded-full cursor-pointer"
                 >
                   X
                 </div>
-                {/* </div> */}
-                {/* </div> */}
               </div>
             </div>
           );
